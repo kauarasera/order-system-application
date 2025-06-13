@@ -3,6 +3,7 @@ package com.kauarasera.sales_system.entity;
 public class OrderEntity {
     private Integer code;
     private Double basic;
+    private Double discount;
 
     public OrderEntity() {
     }
@@ -36,6 +37,4 @@ public class OrderEntity {
     public void setDiscount(Double discount) {
         this.discount = discount;
     }
-
-    private Double discount;
 }
