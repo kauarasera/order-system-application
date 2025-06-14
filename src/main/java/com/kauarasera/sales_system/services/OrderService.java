@@ -1,12 +1,25 @@
 package com.kauarasera.sales_system.services;
 
 import com.kauarasera.sales_system.entity.OrderEntity;
+import org.springframework.stereotype.Service;
 
+@Service
 public class OrderService {
 
-//injetar ShippingService pois a Order depende dele para o resultado final
+    private ShippingService shippingService;
 
-    public double total(OrderEntity order) {
+    public OrderService(ShippingService shippingService) {
+        this.shippingService = shippingService;
+    }
+
+    public double total(OrderEntity orderEntity) {
+
+        double basic = orderEntity.getBasic();
+        double discount = orderEntity.getDiscount();
+        double discounted = basic - (basic * discount / 100);
+        double shippingFee = shippingService.shipment(orderEntity);
+
+        return discounted + shippingFee;
 
     }
 }
